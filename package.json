@@ -1,0 +1,17 @@
+{
+  "name": "birthday-app-ds",
+  "version": "0.2.0",
+  "description": "Lightweight birthday reservation dashboard for managing birthday bookings.",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "birthday",
+    "booking",
+    "dashboard"
+  ],
+  "author": "",
+  "license": "MIT"
+}

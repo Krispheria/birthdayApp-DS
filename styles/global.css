@@ -1,0 +1,360 @@
+:root {
+  color-scheme: light;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  font-size: 16px;
+  background-color: #f4f6fb;
+  color: #1f2933;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1,
+ h2,
+ h3 {
+  margin: 0;
+  font-weight: 600;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem clamp(1rem, 2vw, 2.5rem);
+  background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+  color: white;
+  gap: 1.5rem;
+}
+
+.status-legend {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+}
+
+.legend-dot.available {
+  background-color: #1fdb8f;
+}
+
+.legend-dot.pending {
+  background-color: #ffb020;
+}
+
+.legend-dot.confirmed {
+  background-color: #f05252;
+}
+
+.app-main {
+  display: grid;
+  grid-template-columns: minmax(320px, 1fr) minmax(320px, 400px);
+  gap: 2rem;
+  padding: 2rem clamp(1rem, 2vw, 2.5rem);
+  flex: 1;
+}
+
+.calendar-panel,
+.form-panel {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.08);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.panel-header button {
+  border: none;
+  background: #eff6ff;
+  border-radius: 999px;
+  padding: 0.5rem 0.75rem;
+  font-size: 1.1rem;
+  color: #2563eb;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.panel-header button:hover {
+  background: #dbeafe;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+}
+
+.calendar-cell {
+  position: relative;
+  padding: 0.75rem 0.5rem;
+  border-radius: 0.75rem;
+  background: #f8fafc;
+  text-align: center;
+  min-height: 4.5rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.calendar-cell:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.12);
+}
+
+.calendar-cell.disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+  background: #e2e8f0;
+}
+
+.calendar-cell.selected {
+  outline: 3px solid #2563eb;
+  outline-offset: 2px;
+  background: #e0f2fe;
+}
+
+.calendar-cell .date-number {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.calendar-cell .status-chip {
+  margin-top: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.1rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.status-chip.available {
+  color: #047857;
+  background: rgba(16, 185, 129, 0.15);
+}
+
+.status-chip.pending {
+  color: #92400e;
+  background: rgba(245, 158, 11, 0.2);
+}
+
+.status-chip.confirmed {
+  color: #b91c1c;
+  background: rgba(248, 113, 113, 0.2);
+}
+
+.selection-hint {
+  text-align: center;
+  background: #f8fafc;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  color: #475569;
+}
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.booking-form fieldset {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.booking-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+}
+
+.booking-form input,
+.booking-form textarea {
+  border-radius: 0.6rem;
+  border: 1px solid #cbd5f5;
+  padding: 0.6rem 0.75rem;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.booking-form input:focus,
+.booking-form textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+.time-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.form-actions button {
+  padding: 0.65rem 1.25rem;
+  border-radius: 0.75rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
+}
+
+.form-actions button[type='submit'] {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.25);
+}
+
+.form-actions button[type='submit']:hover {
+  transform: translateY(-1px);
+}
+
+.form-actions button#cancelSelection {
+  background: #e2e8f0;
+  color: #475569;
+}
+
+.form-footnote {
+  font-size: 0.85rem;
+  color: #64748b;
+  text-align: right;
+  margin: 0;
+}
+
+.booking-summary {
+  background: #f8fafc;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.booking-summary ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.booking-summary li {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.booking-summary li strong {
+  font-size: 0.95rem;
+}
+
+.app-footer {
+  padding: 1.5rem clamp(1rem, 2vw, 2.5rem);
+  text-align: center;
+  color: #475569;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 960px) {
+  .app-main {
+    grid-template-columns: 1fr;
+  }
+
+  .form-panel {
+    order: -1;
+  }
+}
+
+@media (max-width: 600px) {
+  .app-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .calendar-grid {
+    gap: 0.35rem;
+  }
+
+  .calendar-cell {
+    padding: 0.6rem 0.4rem;
+  }
+}
+
+  
+.calendar-grid.weekdays {
+  margin-bottom: 0.75rem;
+}
+
+.calendar-grid.weekdays .calendar-cell {
+  background: transparent;
+  cursor: default;
+  box-shadow: none;
+  transform: none;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.calendar-grid.weekdays .calendar-cell:hover {
+  box-shadow: none;
+  transform: none;
+}
