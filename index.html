@@ -7,107 +7,96 @@
     <link rel="stylesheet" href="./styles/global.css" />
   </head>
   <body>
-    <div class="app-shell">
-      <header class="app-header">
-        <div class="app-header__copy">
-          <p class="app-header__kicker">Tu centro de fiestas</p>
-          <h1>Agenda de Cumpleaños</h1>
-          <p>Explora la disponibilidad, reserva y asegura tu fecha en minutos.</p>
+    <header class="app-header">
+      <div>
+        <h1>Agenda de Cumpleaños</h1>
+        <p>Selecciona un día disponible y completa los datos para reservar.</p>
+      </div>
+      <div class="status-legend" aria-label="Estado de reservas">
+        <span class="legend-item">
+          <span class="legend-dot available"></span> Disponible
+        </span>
+        <span class="legend-item">
+          <span class="legend-dot pending"></span> Pendiente (en revisión)
+        </span>
+        <span class="legend-item">
+          <span class="legend-dot confirmed"></span> Confirmado
+        </span>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <section class="calendar-panel" aria-label="Calendario de reservas">
+        <header class="panel-header">
+          <button id="prevMonth" aria-label="Mes anterior">◀</button>
+          <h2 id="calendarTitle"></h2>
+          <button id="nextMonth" aria-label="Mes siguiente">▶</button>
+        </header>
+        <div id="calendarGrid" class="calendar-grid" role="grid" aria-labelledby="calendarTitle"></div>
+      </section>
+
+      <section class="form-panel" aria-label="Formulario de reserva">
+        <div id="selectionHint" class="selection-hint">
+          Toca un día disponible para comenzar tu reserva.
         </div>
-        <div class="status-legend" aria-label="Estado de reservas">
-          <span class="legend-item">
-            <span class="legend-dot available" aria-hidden="true"></span>
-            <span class="legend-label">Disponible</span>
-          </span>
-          <span class="legend-item">
-            <span class="legend-dot pending" aria-hidden="true"></span>
-            <span class="legend-label">Pendiente</span>
-          </span>
-          <span class="legend-item">
-            <span class="legend-dot confirmed" aria-hidden="true"></span>
-            <span class="legend-label">Confirmado</span>
-          </span>
-        </div>
-      </header>
-
-      <main class="app-main">
-        <section class="calendar-panel" aria-label="Calendario de reservas">
-          <header class="panel-header">
-            <button id="prevMonth" aria-label="Mes anterior">◀</button>
-            <h2 id="calendarTitle"></h2>
-            <button id="nextMonth" aria-label="Mes siguiente">▶</button>
-          </header>
-          <div
-            id="calendarGrid"
-            class="calendar-grid"
-            role="grid"
-            aria-labelledby="calendarTitle"
-          ></div>
-        </section>
-
-        <section class="form-panel" aria-label="Formulario de reserva">
-          <div id="selectionHint" class="selection-hint">
-            Toca un día disponible para comenzar tu reserva.
-          </div>
-          <form id="bookingForm" class="booking-form" hidden novalidate>
-            <fieldset>
-              <legend>Datos de la persona encargada</legend>
+        <form id="bookingForm" class="booking-form" hidden novalidate>
+          <fieldset>
+            <legend>Datos de la persona encargada</legend>
+            <label>
+              Nombre completo
+              <input type="text" name="fullName" autocomplete="name" required />
+            </label>
+            <label>
+              Correo electrónico
+              <input type="email" name="email" autocomplete="email" required />
+            </label>
+            <label>
+              Número de celular
+              <input type="tel" name="phone" autocomplete="tel" required pattern="^[0-9+\-()\s]{7,}$" />
+            </label>
+          </fieldset>
+          <fieldset>
+            <legend>Horario del evento</legend>
+            <div class="time-row">
               <label>
-                Nombre completo
-                <input type="text" name="fullName" autocomplete="name" required />
+                Hora de inicio
+                <input type="time" name="startTime" min="09:00" max="22:00" required />
               </label>
               <label>
-                Correo electrónico
-                <input type="email" name="email" autocomplete="email" required />
+                Hora de término
+                <input type="time" name="endTime" min="09:00" max="22:00" required />
               </label>
-              <label>
-                Número de celular
-                <input type="tel" name="phone" autocomplete="tel" required pattern="^[0-9+\-()\s]{7,}$" />
-              </label>
-            </fieldset>
-            <fieldset>
-              <legend>Horario del evento</legend>
-              <div class="time-row">
-                <label>
-                  Hora de inicio
-                  <input type="time" name="startTime" min="09:00" max="22:00" required />
-                </label>
-                <label>
-                  Hora de término
-                  <input type="time" name="endTime" min="09:00" max="22:00" required />
-                </label>
-              </div>
-            </fieldset>
-            <fieldset>
-              <legend>Notas</legend>
-              <textarea name="notes" rows="3" placeholder="Cuéntanos detalles importantes (opcional)"></textarea>
-            </fieldset>
-
-            <input type="hidden" name="eventDate" />
-
-            <div class="form-actions">
-              <button type="button" id="cancelSelection" class="ghost">Cancelar</button>
-              <button type="submit" class="primary">Reservar cumpleaños</button>
             </div>
-            <p class="form-footnote">
-              * Al enviar la solicitud nos comunicaremos contigo para confirmar disponibilidad y pago.
-            </p>
-          </form>
+          </fieldset>
+          <fieldset>
+            <legend>Notas</legend>
+            <textarea name="notes" rows="3" placeholder="Cuéntanos detalles importantes (opcional)"></textarea>
+          </fieldset>
 
-          <section class="booking-summary" aria-live="polite">
-            <h3>Reservas recientes</h3>
-            <ul id="bookingList"></ul>
-          </section>
+          <input type="hidden" name="eventDate" />
+
+          <div class="form-actions">
+            <button type="button" id="cancelSelection">Cancelar</button>
+            <button type="submit">Reservar cumpleaños</button>
+          </div>
+          <p class="form-footnote">
+            * Al enviar la solicitud nos comunicaremos contigo para confirmar disponibilidad y pago.
+          </p>
+        </form>
+
+        <section class="booking-summary" aria-live="polite">
+          <h3>Reservas recientes</h3>
+          <ul id="bookingList"></ul>
         </section>
-      </main>
+      </section>
+    </main>
 
-      <footer class="app-footer">
-        <p>
-          Conectado a <strong>Google Sheets</strong> mediante <strong>n8n</strong>. Puedes adaptar el
-          webhook y la hoja de cálculo desde <code>scripts/config.js</code>.
-        </p>
-      </footer>
-    </div>
+    <footer class="app-footer">
+      <p>
+        Conectado a <strong>Google Sheets</strong> mediante <strong>n8n</strong>. Puedes adaptar el
+        webhook y la hoja de cálculo desde <code>scripts/config.js</code>.
+      </p>
+    </footer>
 
     <script type="module" src="./scripts/main.js"></script>
   </body>

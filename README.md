@@ -2,8 +2,7 @@
 
 Dashboard liviano y totalmente estático para gestionar reservas de cumpleaños en tu local. Está
 pensado para funcionar aun cuando no puedas instalar dependencias externas: basta con tener Node.js
-para servir los archivos o incluso abrir `index.html` directamente en tu navegador. Toda la interfaz
-está diseñada mobile-first para sentirse como una app nativa en pantallas Android.
+para servir los archivos o incluso abrir `index.html` directamente en tu navegador.
 
 > "Hecho con peras y manzanas": cada módulo viene con nombres descriptivos y comentarios básicos
 > para que puedas adaptarlo rápido, ya sea integrándolo con n8n, Google Sheets o un gateway de pago.
